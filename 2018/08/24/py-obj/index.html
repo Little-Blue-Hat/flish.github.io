@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="python类本书前面反复提到了类，并将其用作类型的同义词。从很多方面来说，这正是类的定义—— 一种对象。每个对象都属于特定的类，并被称为该类的实例。python中的类也是对象，是特殊的对象罢了。跟C++中的类完全不一样，C++中的类是数据类型，python的类是类似数据类型的对象 创建自定义类123456789class Person:    def set_name(self, name):">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python类">
+<meta property="og:url" content="http://yoursite.com/2018/08/24/py-obj/index.html">
+<meta property="og:site_name" content="lflish">
+<meta property="og:description" content="python类本书前面反复提到了类，并将其用作类型的同义词。从很多方面来说，这正是类的定义—— 一种对象。每个对象都属于特定的类，并被称为该类的实例。python中的类也是对象，是特殊的对象罢了。跟C++中的类完全不一样，C++中的类是数据类型，python的类是类似数据类型的对象 创建自定义类123456789class Person:    def set_name(self, name):">
+<meta property="og:updated_time" content="2019-02-14T07:46:48.284Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python类">
+<meta name="twitter:description" content="python类本书前面反复提到了类，并将其用作类型的同义词。从很多方面来说，这正是类的定义—— 一种对象。每个对象都属于特定的类，并被称为该类的实例。python中的类也是对象，是特殊的对象罢了。跟C++中的类完全不一样，C++中的类是数据类型，python的类是类似数据类型的对象 创建自定义类123456789class Person:    def set_name(self, name):">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/24/py-obj/"/>
+
+
+
+
+
+  <title>python类 | lflish</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-91611718-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lflish</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">内核虐我千百遍，我却待她如初恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/24/py-obj/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lflish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lflish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python类</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-24T04:38:44+08:00">
+                2018-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="python类"><a href="#python类" class="headerlink" title="python类"></a>python类</h2><p>本书前面反复提到了类，并将其用作类型的同义词。从很多方面来说，这正是类的定义—— 一种对象。每个对象都属于特定的类，并被称为该类的实例。<br><em>python中的类也是对象，是特殊的对象罢了。跟C++中的类完全不一样，C++中的类是数据类型，python的类是类似数据类型的对象</em></p>
+<h4 id="创建自定义类"><a href="#创建自定义类" class="headerlink" title="创建自定义类"></a>创建自定义类</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_name</span><span class="params">(self, name)</span>:</span></div><div class="line">        self.name = name</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_name</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.name</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">greet</span><span class="params">(self)</span>:</span></div><div class="line">        print(<span class="string">"Hello, world! I'm &#123;&#125;."</span>.format(self.name))</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h4><p>python中，父类也叫超类<br><em>注意：如果多个超类以不同的方式实现了同一个方法必须在class语句中小心排列这些超类，因为位于前面的类的方法将覆盖位于后面的类的方法。</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Calculator</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">calculate</span><span class="params">(self, expression)</span>:</span></div><div class="line">        self.value = eval(expression)</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Talker</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">talk</span><span class="params">(self)</span>:</span></div><div class="line">        print(<span class="string">'Hi, my value is'</span>, self.value)</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TalkingCalculator</span><span class="params">(Calculator, Talker)</span>:</span></div><div class="line"><span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>tc = TalkingCalculator()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>tc.calculate(<span class="string">'1 + 2 * 3'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>tc.talk()</div><div class="line">Hi, my value <span class="keyword">is</span> <span class="number">7</span></div></pre></td></tr></table></figure></p>
+<h4 id="抽象基类"><a href="#抽象基类" class="headerlink" title="抽象基类"></a>抽象基类</h4><p>形如@this的东西被称为装饰器 来将方法标记为抽象的——在子类中必须实现的方法.<br>抽象类（即包含抽象方法的类）最重要的特征是不能实例化。</p>
+<h4 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h4><p>在Python中，创建构造函数很容易，只需将方法init的名称从普通的init改为魔法版”__init__“即可。</p>
+<p>Python提供了魔法方法”__del__“，也称作析构函数（destructor）。这个方法在对象被销毁(作为垃圾被收集)前被调用，但鉴于你无法知道准确的调用时间，建议尽可能不要使用”__del__“。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FooBar</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, value=<span class="number">42</span>)</span>:</span></div><div class="line">        self.somevar = value</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>f = FooBar(<span class="string">'This is a constructor argument'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>f.somevar</div><div class="line"><span class="string">'This is a constructor argument'</span></div></pre></td></tr></table></figure>
+<h4 id="函数-property"><a href="#函数-property" class="headerlink" title="函数 property"></a>函数 property</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class Rectangle:</div><div class="line">    def __init__ (self):</div><div class="line">        self.width = 0</div><div class="line">        self.height = 0</div><div class="line"></div><div class="line">    def set_size(self, size):</div><div class="line">        self.width, self.height = size</div><div class="line"></div><div class="line">    def get_size(self):</div><div class="line">        return self.width, self.height</div><div class="line">    </div><div class="line">    size = property(get_size, set_size)</div><div class="line"></div><div class="line">&gt;&gt;&gt; r = Rectangle()</div><div class="line">&gt;&gt;&gt; r.width = 10</div><div class="line">&gt;&gt;&gt; r.height = 5</div><div class="line">&gt;&gt;&gt; r.size</div><div class="line">(10, 5)</div><div class="line">&gt;&gt;&gt; r.size = 150, 100</div><div class="line">&gt;&gt;&gt; r.width</div><div class="line">150</div></pre></td></tr></table></figure>
+<p>实际上，调用函数property时，还可不指定参数、指定一个参数、指定三个参数或指定四<br>个参数。</p>
+<h4 id="其它魔法方法"><a href="#其它魔法方法" class="headerlink" title="其它魔法方法"></a>其它魔法方法</h4><p>要在属性被访问时执行一段代码，必须使用一些魔法方法。<br>__getattribute__(self, name)：在属性被访问时自动调用（只适用于新式类）。<br>__getattr__(self, name)：在属性被访问而对象没有这样的属性时自动调用。<br>__setattr__(self, name, value)：试图给属性赋值时自动调用。<br>__delattr__(self, name)：试图删除属性时自动调用。  </p>
+<h4 id="iter-迭代器"><a href="#iter-迭代器" class="headerlink" title="__iter__迭代器"></a>__iter__迭代器</h4><p>方法__iter__返回一个迭代器，它是包含方法__next__的对象，而调用这个方法时可不提供任何参数。当你调用方法__next__时，迭代器应返回其下一个值。如果迭代器没有可供返回的值，应引发StopIteration异常。</p>
+<p>实现了方法__iter__的对象是可迭代的，而实现了方法__next__的对象是迭代器。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fibs</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.a = <span class="number">0</span></div><div class="line">        self.b = <span class="number">1</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></div><div class="line">        self.a, self.b = self.b, self.a + self.b</div><div class="line">        <span class="keyword">return</span> self.a</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>fibs = Fibs()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> f <span class="keyword">in</span> fibs:</div><div class="line"><span class="meta">... </span><span class="keyword">if</span> f &gt; <span class="number">1000</span>:</div><div class="line"><span class="meta">... </span>print(f)</div><div class="line"><span class="meta">... </span><span class="keyword">break</span></div><div class="line">...</div><div class="line"><span class="number">1597</span></div></pre></td></tr></table></figure>
+<h6 id="从迭代器创建序列"><a href="#从迭代器创建序列" class="headerlink" title="从迭代器创建序列"></a>从迭代器创建序列</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">TestIterator</span>:</span></div><div class="line"><span class="meta">... </span>    value = <span class="number">0</span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></div><div class="line"><span class="meta">... </span>        self.value += <span class="number">1</span></div><div class="line"><span class="meta">... </span>        <span class="keyword">if</span> self.value &gt; <span class="number">10</span>: <span class="keyword">raise</span> StopIteration</div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> self.value</div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> self</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>ti = TestIterator()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>list(ti) </div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</div></pre></td></tr></table></figure>
+<h4 id="生成器yield"><a href="#生成器yield" class="headerlink" title="生成器yield"></a>生成器yield</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">flatten</span><span class="params">(nested)</span>:</span></div><div class="line">    <span class="keyword">for</span> sublist <span class="keyword">in</span> nested:</div><div class="line">        <span class="keyword">for</span> element <span class="keyword">in</span> sublist:</div><div class="line">            <span class="keyword">yield</span> element</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>nested = [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>], [<span class="number">5</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> num <span class="keyword">in</span> flatten(nested):</div><div class="line"><span class="meta">... </span>print(num)</div><div class="line">...</div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">2</span></div><div class="line"><span class="number">3</span></div><div class="line"><span class="number">4</span></div><div class="line"><span class="number">5</span></div></pre></td></tr></table></figure>
+<h6 id="发送消息到内部"><a href="#发送消息到内部" class="headerlink" title="发送消息到内部"></a>发送消息到内部</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">repeater</span><span class="params">(value)</span>:</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</div><div class="line">        x = (<span class="keyword">yield</span> i) <span class="comment">#这块会阻塞，send发来的值给x</span></div><div class="line">        <span class="comment">#print(x)</span></div><div class="line"></div><div class="line">r = repeater(<span class="number">42</span>)</div><div class="line"></div><div class="line">print(next(r))</div><div class="line">print(r.send(<span class="string">"hello"</span>))</div><div class="line">print(next(r))</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/24/py-fun/" rel="next" title="python函数定义">
+                <i class="fa fa-chevron-left"></i> python函数定义
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/24/py-while-if/" rel="prev" title="python判断与循环">
+                python判断与循环 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lflish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/lflish" title="mygit" target="_blank">mygit</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python类"><span class="nav-number">1.</span> <span class="nav-text">python类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建自定义类"><span class="nav-number">1.0.1.</span> <span class="nav-text">创建自定义类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多继承"><span class="nav-number">1.0.2.</span> <span class="nav-text">多继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#抽象基类"><span class="nav-number">1.0.3.</span> <span class="nav-text">抽象基类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造函数"><span class="nav-number">1.0.4.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数-property"><span class="nav-number">1.0.5.</span> <span class="nav-text">函数 property</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其它魔法方法"><span class="nav-number">1.0.6.</span> <span class="nav-text">其它魔法方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iter-迭代器"><span class="nav-number">1.0.7.</span> <span class="nav-text">__iter__迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#从迭代器创建序列"><span class="nav-number">1.0.7.0.1.</span> <span class="nav-text">从迭代器创建序列</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成器yield"><span class="nav-number">1.0.8.</span> <span class="nav-text">生成器yield</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#发送消息到内部"><span class="nav-number">1.0.8.0.1.</span> <span class="nav-text">发送消息到内部</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lflish</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.3/jquery.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

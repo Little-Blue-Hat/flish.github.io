@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="python函数def函数定义123def &amp;lt;name&amp;gt;(arg1, arg2,... argN):        &amp;lt;statements&amp;gt;    return &amp;lt;value&amp;gt;">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python函数定义">
+<meta property="og:url" content="http://yoursite.com/2018/08/24/py-fun/index.html">
+<meta property="og:site_name" content="lflish">
+<meta property="og:description" content="python函数def函数定义123def &amp;lt;name&amp;gt;(arg1, arg2,... argN):        &amp;lt;statements&amp;gt;    return &amp;lt;value&amp;gt;">
+<meta property="og:updated_time" content="2019-02-14T07:46:48.284Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python函数定义">
+<meta name="twitter:description" content="python函数def函数定义123def &amp;lt;name&amp;gt;(arg1, arg2,... argN):        &amp;lt;statements&amp;gt;    return &amp;lt;value&amp;gt;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/24/py-fun/"/>
+
+
+
+
+
+  <title>python函数定义 | lflish</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-91611718-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lflish</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">内核虐我千百遍，我却待她如初恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/24/py-fun/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lflish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lflish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python函数定义</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-24T04:34:16+08:00">
+                2018-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="python函数"><a href="#python函数" class="headerlink" title="python函数"></a>python函数</h2><h4 id="def函数定义"><a href="#def函数定义" class="headerlink" title="def函数定义"></a>def函数定义</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> &lt;<span class="title">name</span>&gt;<span class="params">(arg1, arg2,... argN)</span>:</span>    </div><div class="line">    &lt;statements&gt;</div><div class="line">    <span class="keyword">return</span> &lt;value&gt;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>与C这样的编译语言不同，Python函数在程序运行之前并不需要全部定义。更确切地讲，def在运行时才进行评估，而在def之中的代码在函数调用后才会评估。</p>
+<h4 id="global语句"><a href="#global语句" class="headerlink" title="global语句"></a>global语句</h4><p>它并不是一个类型或大小的声明，它是一个命名空间的声明。它告诉Python函数打算生成一个或多个全局变量名。也就是说，存在于整个模块内部作用域（命名空间）的变量名。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">X = <span class="number">88</span>                   <span class="comment"># Global X</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span>    </div><div class="line">    <span class="keyword">global</span> X    </div><div class="line">    X = <span class="number">99</span>               <span class="comment"># Global X: outside deffunc()</span></div><div class="line">print(X)                 <span class="comment"># Prints 99</span></div><div class="line"></div><div class="line">y, z = <span class="number">1</span>, <span class="number">2</span>              <span class="comment"># Global variables in module</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">all_global</span><span class="params">()</span>:</span>    </div><div class="line">    <span class="keyword">global</span> x             <span class="comment"># Declare globals assigned    </span></div><div class="line">    x = y + z            <span class="comment"># No need to declare y, z: LEGB rule</span></div></pre></td></tr></table></figure></p>
+<h4 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h4><ul>
+<li>最小化全局变量</li>
+<li>最小化文件间的修改<br><em>这种隐含的跨文件依赖性，在最好的情况下会导致代码不灵活，最坏的情况下会引发bug。</em><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># first.py</span></div><div class="line">X = <span class="number">99</span>          <span class="comment"># This code doesn't know about second.py</span></div><div class="line"></div><div class="line"><span class="comment"># second.py</span></div><div class="line"><span class="keyword">import</span> first</div><div class="line">print(first.X)   <span class="comment"># Okay: references a name in another file</span></div><div class="line">first.X = <span class="number">88</span>     <span class="comment"># But changing it can be too subtle and implicit</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>升级后<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># first.py</span></div><div class="line">X = <span class="number">99</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">setX</span><span class="params">(new)</span>:</span>    </div><div class="line">    <span class="keyword">global</span> X    </div><div class="line">    X = new</div><div class="line">    </div><div class="line"><span class="comment"># second.py</span></div><div class="line"><span class="keyword">import</span> first</div><div class="line">first.setX(<span class="number">88</span>)</div></pre></td></tr></table></figure></p>
+<p>文件模块使用全局变量<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># thismod.py</span></div><div class="line">var = <span class="number">99</span>            <span class="comment"># Global variable == module attribute</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">local</span><span class="params">()</span>:</span>    </div><div class="line">    var = <span class="number">0</span>                            <span class="comment"># Change local var</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">glob1</span><span class="params">()</span>:</span>    </div><div class="line">    <span class="keyword">global</span> var                         <span class="comment"># Declare global (normal)    </span></div><div class="line">    var += <span class="number">1</span>                           <span class="comment"># Change global var</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">glob2</span><span class="params">()</span>:</span>    </div><div class="line">    var = <span class="number">0</span>                            <span class="comment"># Change local var    </span></div><div class="line">    <span class="keyword">import</span> thismod                     <span class="comment"># Import myself    </span></div><div class="line">    thismod.var += <span class="number">1</span>                   <span class="comment"># Change global var</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">glob3</span><span class="params">()</span>:</span>    </div><div class="line">    var = <span class="number">0</span>                            <span class="comment"># Change local var    </span></div><div class="line">    <span class="keyword">import</span> sys                         <span class="comment"># Import system table    </span></div><div class="line">    glob = sys.modules[<span class="string">'thismod'</span>]      <span class="comment"># Get module object (or use __name__)    </span></div><div class="line">    glob.var += <span class="number">1</span>                      <span class="comment"># Change global var</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span>    </div><div class="line">    print(var)  <span class="comment">#99    </span></div><div class="line">    local(); glob1(); glob2(); glob3()    </div><div class="line">    print(var)  <span class="comment">#102</span></div></pre></td></tr></table></figure></p>
+<h4 id="嵌套作用域举例"><a href="#嵌套作用域举例" class="headerlink" title="嵌套作用域举例"></a>嵌套作用域举例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span><span class="params">()</span>:</span>    </div><div class="line">    X = <span class="number">88</span>   </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f2</span><span class="params">()</span>:</span>       </div><div class="line">        print(X)     <span class="comment"># Remembers X in enclosing def scope   </span></div><div class="line">    <span class="keyword">return</span> f2        <span class="comment"># Return f2 but don't call it   </span></div><div class="line">action = f1()        <span class="comment"># Make, return function</span></div><div class="line">action()             <span class="comment"># Call it now: prints 88</span></div></pre></td></tr></table></figure>
+<p>在这个代码中，我们命名为f2的函数的调用动作的运行是在f1运行后发生的。f2记住了在f1中嵌套作用域中的x，尽管f1已经不处于激活状态。有点费解 这都可以。</p>
+<p>通常来说，类是一个更好的像这样进行“记忆”的选择，因为它们让状态变得很明确。不使用类的话，全局变量、像这样的嵌套作用域引用以及默认的参数就是Python的函数能够保留状态信息的主要方法了。为</p>
+<h4 id="nonlocal语句"><a href="#nonlocal语句" class="headerlink" title="nonlocal语句"></a>nonlocal语句</h4><p>nonlocal和global一样，声明了将要在一个嵌套的作用域中修改的名称。和global的不同之处在于，nonlocal应用于一个嵌套的函数的作用域中的一个名称，而不是所有def之外的全局模块作用域；</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">tester</span><span class="params">(start)</span>:</span></div><div class="line"><span class="meta">... </span>   state = start              <span class="comment"># Each call gets its own state</span></div><div class="line"><span class="meta">... </span>   <span class="function"><span class="keyword">def</span> <span class="title">nested</span><span class="params">(label)</span>:</span></div><div class="line"><span class="meta">... </span>       <span class="keyword">nonlocal</span> state         <span class="comment"># state必须提前声明 不然会报错</span></div><div class="line"><span class="meta">... </span>       print(label, state)</div><div class="line"><span class="meta">... </span>       state += <span class="number">1</span>              <span class="comment"># Allowed to change it if nonlocal</span></div><div class="line"><span class="meta">... </span>   <span class="keyword">return</span> nested</div><div class="line">...</div><div class="line">&gt;&gt;&gt;F = tester(<span class="number">0</span>)</div><div class="line">&gt;&gt;&gt;F(<span class="string">'spam'</span>)                       <span class="comment"># Increments state on each call</span></div><div class="line">spam <span class="number">0</span></div><div class="line">&gt;&gt;&gt;F(<span class="string">'ham'</span>)</div><div class="line">ham <span class="number">1</span></div><div class="line">&gt;&gt;&gt;F(<span class="string">'eggs'</span>)</div><div class="line">eggs <span class="number">2</span></div></pre></td></tr></table></figure>
+<h4 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h4><ul>
+<li>不可变参数“通过值”进行传递。像整数和字符串这样的对象是通过对象引用而不是拷贝进行传递的，但是因为你无论怎样都不可能在原处改变不可变对象，实际的效果就很像创建了一份拷贝。<ul>
+<li>可变对象是通过“指针”进行传递的。例如，列表和字典这样的对象也是通过对象引用进行传递的，这一点与C语言使用指针传递数组很相似：可变对象能够在函数内部进行原处的改变，这一点和C数组很像。</li>
+</ul>
+</li>
+</ul>
+<h6 id="不可变对象"><a href="#不可变对象" class="headerlink" title="不可变对象"></a>不可变对象</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>x = <span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>id(x)</div><div class="line"><span class="number">19852392</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>x +=<span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>id(x)</div><div class="line"><span class="number">19852368</span></div></pre></td></tr></table></figure>
+<h6 id="不可变对象的函数传参"><a href="#不可变对象的函数传参" class="headerlink" title="不可变对象的函数传参"></a>不可变对象的函数传参</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(a)</span>:</span>    <span class="comment"># a is assigned to (references) passed object</span></div><div class="line"><span class="meta">... </span>   a = <span class="number">99</span>   <span class="comment"># Changes local variable a only</span></div><div class="line">...</div><div class="line">&gt;&gt;&gt;b = <span class="number">88</span></div><div class="line">&gt;&gt;&gt;f(b)         <span class="comment"># a and b both reference same 88 initially</span></div><div class="line">&gt;&gt;&gt;print(b)     <span class="comment"># b is not changed</span></div><div class="line"><span class="number">88</span></div></pre></td></tr></table></figure>
+<h6 id="可变对象的函数传参"><a href="#可变对象的函数传参" class="headerlink" title="可变对象的函数传参"></a>可变对象的函数传参</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">changer</span><span class="params">(a, b)</span>:</span>  <span class="comment"># Arguments assigned references to objects</span></div><div class="line"><span class="meta">... </span>   a = <span class="number">2</span>          <span class="comment"># Changes local name's value only</span></div><div class="line"><span class="meta">... </span>   b[<span class="number">0</span>] = <span class="string">'spam'</span>   <span class="comment"># Changes shared object in-place</span></div><div class="line">...</div><div class="line">&gt;&gt;&gt;X = <span class="number">1</span></div><div class="line">&gt;&gt;&gt;L = [<span class="number">1</span>, <span class="number">2</span>]          <span class="comment"># Caller</span></div><div class="line">&gt;&gt;&gt;changer(X, L)       <span class="comment"># Pass immutable and mutable objects</span></div><div class="line">&gt;&gt;&gt;X, L                <span class="comment"># X is unchanged, L is different!</span></div><div class="line">(<span class="number">1</span>, [<span class="string">'spam'</span>, <span class="number">2</span>])</div></pre></td></tr></table></figure>
+<h6 id="避免可变参数的修改"><a href="#避免可变参数的修改" class="headerlink" title="避免可变参数的修改"></a>避免可变参数的修改</h6><p>方式一<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">L = [1, 2]</div><div class="line">changer(X, L[:])   # Pass a copy, so our &apos;L&apos; does not change</div></pre></td></tr></table></figure></p>
+<p>方式二<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">changer</span><span class="params">(a, b)</span>:</span>   </div><div class="line">    b = b[:]             <span class="comment"># Copy input list so we don't impact caller</span></div><div class="line">    a = <span class="number">2</span></div><div class="line">    b[<span class="number">0</span>] = <span class="string">'spam'</span>            <span class="comment"># Changes our list copy only</span></div></pre></td></tr></table></figure></p>
+<p>方式三 转换为元组<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">L = [<span class="number">1</span>, <span class="number">2</span>]</div><div class="line">changer(X, tuple(L))       <span class="comment"># Pass a tuple, so changes</span></div></pre></td></tr></table></figure></p>
+<h4 id="特定的参数匹配模型"><a href="#特定的参数匹配模型" class="headerlink" title="特定的参数匹配模型"></a>特定的参数匹配模型</h4><ul>
+<li><p>位置：从左至右进行匹配<br><em>一般情况下，也是我们迄今为止最常使用的那种方法，是通过位置进行匹配把参数值传递给函数头部的参数名称，匹配顺序为从左到右。</em></p>
+</li>
+<li><p>关键字参数：通过参数名进行匹配<br><em>调用者可以定义哪一个函数接受这个值，通过在调用时使用参数的变量名，使用name=value这种语法。</em></p>
+</li>
+<li><p>默认参数：为没有传入值的参数定义参数值<br><em>如果调用时传入的值过于少的话，函数能够为参数定义接受的默认值，再一次使用语法name=value。</em></p>
+</li>
+<li><p>可变参数：收集任意多基于位置或关键字的参数<br><em>函数能够使用特定的参数，它们是以字符*或**(*对应序列，**对应key=value)开头，收集任意多的额外参数（这个特性常常叫做可变参数，类似C语言中的可变参数特性，也能够支持可变长度参数的列表）。</em></p>
+</li>
+</ul>
+<ul>
+<li><p>可变参数解包：传递任意多的基于位置或关键字的参数<br><em>调用者能够再使用*语法去将参数集合打散，分成参数。这个“*”与在函数头部的“*”恰恰相反：在函数头部它意味着收集任意多的参数，而在调用者中意味着传递任意多的参数。</em></p>
+</li>
+<li><p>Keyword-only参数：参数必须按照名称传递<br><em>在Python 3.0中（不包括Python2.6中），函数也可以指定参数，参数必须用带有关键参数的名字（而不是位置）来传递。这样的参数通常用来定义实际参数以外的配置选项。</em></p>
+</li>
+</ul>
+<h6 id="关键字参数"><a href="#关键字参数" class="headerlink" title="关键字参数"></a>关键字参数</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(a, b, c)</span>:</span> print(a, b, c)</div><div class="line"><span class="comment">#普通调用</span></div><div class="line">&gt;&gt;&gt;f(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</div><div class="line"></div><div class="line"><span class="comment">#关键字参数</span></div><div class="line">&gt;&gt;&gt;f(c=<span class="number">3</span>, b=<span class="number">2</span>, a=<span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="comment">#默认参数</span></div><div class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(a, b=<span class="number">2</span>, c=<span class="number">3</span>)</span>:</span> print(a, b, c)</div><div class="line">&gt;&gt;&gt;f(<span class="number">1</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#收集参数</span></div><div class="line"></div><div class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(*args)</span>:</span> print(args)</div><div class="line">&gt;&gt;&gt;f(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</div><div class="line"></div><div class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(a, *pargs, **kargs)</span>:</span> print(a, pargs, kargs)</div><div class="line">&gt;&gt;&gt;f(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, x=<span class="number">1</span>, y=<span class="number">2</span>)</div><div class="line"><span class="number">1</span> (<span class="number">2</span>, <span class="number">3</span>) &#123;<span class="string">'y'</span>: <span class="number">2</span>, <span class="string">'x'</span>: <span class="number">1</span>&#125;</div><div class="line"></div><div class="line"><span class="comment">#解包参数</span></div><div class="line"></div><div class="line"><span class="comment">#元组</span></div><div class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a, b, c, d)</span>:</span> print(a, b, c, d)</div><div class="line">...</div><div class="line">&gt;&gt;&gt;args = (<span class="number">1</span>, <span class="number">2</span>)</div><div class="line">&gt;&gt;&gt;args += (<span class="number">3</span>, <span class="number">4</span>)</div><div class="line">&gt;&gt;&gt;func(*args)</div><div class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></div><div class="line"></div><div class="line"><span class="comment">#字典</span></div><div class="line">&gt;&gt;&gt;args = &#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>, <span class="string">'c'</span>: <span class="number">3</span>&#125;</div><div class="line">&gt;&gt;&gt;args[<span class="string">'d'</span>] = <span class="number">4</span></div><div class="line">&gt;&gt;&gt;func(**args)</div></pre></td></tr></table></figure>
+<h4 id="varargs调用语法-暂时不动有卵用"><a href="#varargs调用语法-暂时不动有卵用" class="headerlink" title="varargs调用语法  暂时不动有卵用"></a>varargs调用语法  暂时不动有卵用</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">tracer</span><span class="params">(func, *pargs, **kargs)</span>:</span>         <span class="comment"># Accept arbitrary arguments    </span></div><div class="line">    print(<span class="string">'calling:'</span>, func.__name__) </div><div class="line">    <span class="keyword">return</span> func(*pargs, **kargs)           <span class="comment"># Pass along arbitrary arguments</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a, b, c, d)</span>:</span>    </div><div class="line">    <span class="keyword">return</span> a + b + c + d</div><div class="line"></div><div class="line">print(tracer(func, <span class="number">1</span>, <span class="number">2</span>, c=<span class="number">3</span>, d=<span class="number">4</span>))</div></pre></td></tr></table></figure>
+<h4 id="Keyword-Only参数"><a href="#Keyword-Only参数" class="headerlink" title="Keyword-Only参数"></a>Keyword-Only参数</h4><p><em>keyword-only参数——即必须只按照关键字传递并且不会由一个位置参数来填充的参数。</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">kwonly</span><span class="params">(a, *, b, c=<span class="string">'spam'</span>)</span>:</span></div><div class="line"><span class="meta">... </span>   print(a, b, c)</div><div class="line">...</div><div class="line">&gt;&gt;&gt;kwonly(<span class="number">1</span>, b=<span class="string">'eggs'</span>)</div><div class="line"><span class="number">1</span> eggs spam</div><div class="line"></div><div class="line">&gt;&gt;&gt;kwonly(<span class="number">1</span>, c=<span class="string">'eggs'</span>)</div><div class="line">TypeError: kwonly() needs keyword-only argument b</div><div class="line"></div><div class="line">&gt;&gt;&gt;kwonly(<span class="number">1</span>, <span class="number">2</span>)</div><div class="line">TypeError: kwonly() takes exactly <span class="number">1</span> positional argument (<span class="number">2</span> given)</div></pre></td></tr></table></figure></p>
+<p><em>keyword-only参数必须在一个单个星号后面指定，而不是两个星号——命名的参数不能出现在**args任意关键字形式的后面，并且一个**不能独自出现在参数列表中。这两种做法都将产生语法错误：</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#这里不用怀疑 语法分析 那块估计会有问题</span></div><div class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">kwonly</span><span class="params">(a, **pargs, b, c)</span>:</span></div><div class="line">SyntaxError: invalid syntax</div><div class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">kwonly</span><span class="params">(a, **, b, c)</span>:</span></div><div class="line">SyntaxError: invalid syntax</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/17/设计者的品味/" rel="next" title="设计者的品味">
+                <i class="fa fa-chevron-left"></i> 设计者的品味
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/24/py-obj/" rel="prev" title="python类">
+                python类 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lflish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/lflish" title="mygit" target="_blank">mygit</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python函数"><span class="nav-number">1.</span> <span class="nav-text">python函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#def函数定义"><span class="nav-number">1.0.1.</span> <span class="nav-text">def函数定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#global语句"><span class="nav-number">1.0.2.</span> <span class="nav-text">global语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原则"><span class="nav-number">1.0.3.</span> <span class="nav-text">原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#嵌套作用域举例"><span class="nav-number">1.0.4.</span> <span class="nav-text">嵌套作用域举例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nonlocal语句"><span class="nav-number">1.0.5.</span> <span class="nav-text">nonlocal语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数参数"><span class="nav-number">1.0.6.</span> <span class="nav-text">函数参数</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#不可变对象"><span class="nav-number">1.0.6.0.1.</span> <span class="nav-text">不可变对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#不可变对象的函数传参"><span class="nav-number">1.0.6.0.2.</span> <span class="nav-text">不可变对象的函数传参</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#可变对象的函数传参"><span class="nav-number">1.0.6.0.3.</span> <span class="nav-text">可变对象的函数传参</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#避免可变参数的修改"><span class="nav-number">1.0.6.0.4.</span> <span class="nav-text">避免可变参数的修改</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特定的参数匹配模型"><span class="nav-number">1.0.7.</span> <span class="nav-text">特定的参数匹配模型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#关键字参数"><span class="nav-number">1.0.7.0.1.</span> <span class="nav-text">关键字参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#varargs调用语法-暂时不动有卵用"><span class="nav-number">1.0.8.</span> <span class="nav-text">varargs调用语法  暂时不动有卵用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Keyword-Only参数"><span class="nav-number">1.0.9.</span> <span class="nav-text">Keyword-Only参数</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lflish</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.3/jquery.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

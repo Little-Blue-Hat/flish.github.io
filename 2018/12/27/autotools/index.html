@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python, Web" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="autoconf工具的初步学习autoconf产生的历史原因原先写过一篇文章，叫《学习从历史开始》,这里先说下autotools产生的历史原因。autoconf历史：https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/History.html#History   一、Genesis19">
+<meta property="og:type" content="article">
+<meta property="og:title" content="autotools">
+<meta property="og:url" content="http://yoursite.com/2018/12/27/autotools/index.html">
+<meta property="og:site_name" content="lflish">
+<meta property="og:description" content="autoconf工具的初步学习autoconf产生的历史原因原先写过一篇文章，叫《学习从历史开始》,这里先说下autotools产生的历史原因。autoconf历史：https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/History.html#History   一、Genesis19">
+<meta property="og:updated_time" content="2019-02-14T07:46:48.283Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="autotools">
+<meta name="twitter:description" content="autoconf工具的初步学习autoconf产生的历史原因原先写过一篇文章，叫《学习从历史开始》,这里先说下autotools产生的历史原因。autoconf历史：https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/History.html#History   一、Genesis19">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/27/autotools/"/>
+
+
+
+
+
+  <title>autotools | lflish</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-91611718-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lflish</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">内核虐我千百遍，我却待她如初恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/27/autotools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lflish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lflish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">autotools</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-27T15:04:35+08:00">
+                2018-12-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="autoconf工具的初步学习"><a href="#autoconf工具的初步学习" class="headerlink" title="autoconf工具的初步学习"></a>autoconf工具的初步学习</h1><h2 id="autoconf产生的历史原因"><a href="#autoconf产生的历史原因" class="headerlink" title="autoconf产生的历史原因"></a>autoconf产生的历史原因</h2><p>原先写过一篇文章，叫《学习从历史开始》,这里先说下autotools产生的历史原因。<br>autoconf历史：<br><a href="https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/History.html#History" target="_blank" rel="external">https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/History.html#History</a>  </p>
+<h3 id="一、Genesis"><a href="#一、Genesis" class="headerlink" title="一、Genesis"></a>一、<strong>Genesis</strong></h3><p>1991年6月，作者维护了许多GNU的开源软件，而且这些开源软件被应用到了很多的平台。每个平台可能都需要依赖不同的-D参数来编译，<em>(-D是gcc编译器处理宏定义的一个选项)</em>。所以作者写了个shell脚本来检测系统已安装的工具包。由此configure脚本就诞生了。<br>    后续做了一些改进，使用Makefile.in作为模板。<br><a id="more"></a></p>
+<h3 id="二、Exodus"><a href="#二、Exodus" class="headerlink" title="二、Exodus"></a>二、<strong>Exodus</strong></h3><p>起初，许多用户给作者发送了很多建议，作者都是通过emacs中的搜索替换功能来更新自己的configure。<br>    有天，有位大佬说作者工具很棒，问作者是否有自动生成的工具，作者意识到，是时候让它自己来生成脚本了。(小度啊，是时候自己写代码了)，于是，作者选用了M4语言来生成脚本。  </p>
+<h3 id="三、Leviticus"><a href="#三、Leviticus" class="headerlink" title="三、Leviticus"></a><strong>三、Leviticus</strong></h3><p>添加新的特性。比如，通过创建c的头文件来代替-D选项，这个应该就是指的config.h 这类文件。</p>
+<h3 id="四、Numbers"><a href="#四、Numbers" class="headerlink" title="四、Numbers"></a><strong>四、Numbers</strong></h3><p>终于，在1992年发布了autoconf的1.0，越来越多的人使用，包括哪些非GNU人员。这中间有许多开发者加入进来添加了许多新的特性，支持了更多的语言。</p>
+<h3 id="五、Leviticus"><a href="#五、Leviticus" class="headerlink" title="五、Leviticus"></a><strong>五、Leviticus</strong></h3><p>1994，经过许多人的共同开发，这工具也大概就进入到了稳定期，这时候多少会留下来一些问题，不如编码风格，宏命名规范，等等。作者做了一些修正，统一，部分特性的添加。<br>由此，2.0也就来临了。<br>(作者说，我又开始 闲的一批了)</p>
+<h1 id="autoconf使用案例"><a href="#autoconf使用案例" class="headerlink" title="autoconf使用案例"></a>autoconf使用案例</h1><h3 id="一、普通版本"><a href="#一、普通版本" class="headerlink" title="一、普通版本"></a>一、<strong>普通版本</strong></h3><p>两个文件，一个makefile文件，一个program.cc文件</p>
+<p>Makefile文件<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CXX=g++</div><div class="line">LD=g++</div><div class="line">CXXFLAGS=-Wall -Wextra</div><div class="line"></div><div class="line"><span class="section">program: program.o</span></div><div class="line">	<span class="variable">$(LD)</span> -o <span class="variable">$@</span> <span class="variable">$^</span></div></pre></td></tr></table></figure></p>
+<p>program.cc文件<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello, I am a program\n"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编译<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make &amp;&amp; ./program</div></pre></td></tr></table></figure></p>
+<h3 id="二、autoconf版本"><a href="#二、autoconf版本" class="headerlink" title="二、autoconf版本"></a>二、<strong>autoconf版本</strong></h3><p>一共三个文件，分别是makefile.in, configure.ac,program.cc<br>makefile.in是生成makefile的模板，会替换其中的部分变量<br>configure.ac 通过autoconf生成configure<br>Makefile.in 文件<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">CXX=@CXX@</div><div class="line">LD=@CXX@</div><div class="line">CXXFLAGS=@CXXFLAGS@</div><div class="line"></div><div class="line"><span class="section">program: program.o</span></div><div class="line">	<span class="variable">$(LD)</span> -o <span class="variable">$@</span> <span class="variable">$^</span></div><div class="line"></div><div class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: clean</span></div><div class="line"><span class="section">clean:</span></div><div class="line">	rm -f program *.o</div></pre></td></tr></table></figure></p>
+<p>configure.ac 文件<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">AC_INIT(program, 1.0)</div><div class="line"></div><div class="line"><span class="comment">#dnl Switch to a C++ compiler, and check if it works.</span></div><div class="line">AC_LANG(C++)</div><div class="line">AC_PROG_CXX</div><div class="line"></div><div class="line"><span class="comment">#dnl Process Makefile.in to create Makefile</span></div><div class="line">AC_OUTPUT(Makefile)</div></pre></td></tr></table></figure></p>
+<p>_AC_PROG<em>CXX:会初始化当前语言的一些默认参数，比如CXX=G++,CXXFLAGS= -g -O2等</em><br>_AC<em>LANG(C++):标识当前语言</em><br>_AC<em>OUTPUT创建输出文件</em><br><em>dnl是注释</em> </p>
+<p>运行<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./configure &amp;&amp;  make</div></pre></td></tr></table></figure></p>
+<p>这里默认CXX就是g++了 因为语言是c++，但是也可以通过在configure.ac中指定，或者在运行configure时指定<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./configure CXX="gcc-c++"</div></pre></td></tr></table></figure></p>
+<h3 id="三、选择文件编译"><a href="#三、选择文件编译" class="headerlink" title="三、选择文件编译"></a>三、<strong>选择文件编译</strong></h3><p>这里有五个文件，分别是Makefile.in, configure.ac, hello_libz.cc, hello_no_libz.cc, program.cc  </p>
+<p>Makefile.in文件<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">CXX=@CXX@</div><div class="line">LD=@CXX@</div><div class="line">CXXFLAGS=@CXXFLAGS@</div><div class="line">LDFLAGS=@LDFLAGS@</div><div class="line">LIBS=@LIBS@</div><div class="line"></div><div class="line">objs=@objs@</div><div class="line"></div><div class="line"><span class="section">program: program.o <span class="variable">$(objs)</span></span></div><div class="line">	<span class="variable">$(LD)</span> -o <span class="variable">$@</span> <span class="variable">$^</span> <span class="variable">$(LDFLAGS)</span> <span class="variable">$(LIBS)</span></div><div class="line"></div><div class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: clean</span></div><div class="line"><span class="section">clean:</span></div><div class="line">	rm -f program *.o</div></pre></td></tr></table></figure></p>
+<p>configure.ac<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">AC_INIT(program, 1.0)</div><div class="line"></div><div class="line">dnl Switch to a C++ compiler, and check if it works.</div><div class="line">AC_LANG(C++)</div><div class="line">AC_PROG_CXX</div><div class="line"></div><div class="line"><span class="comment">#dnl List of object files as determined by autoconf</span></div><div class="line">object_files=<span class="string">""</span></div><div class="line"></div><div class="line">a=0</div><div class="line">AC_CHECK_HEADERS(zlib.h, [], [a=1])</div><div class="line">AC_SEARCH_LIBS(deflate, z, [], [a=1])</div><div class="line"></div><div class="line">if test $a == 0</div><div class="line">then</div><div class="line">	object_files=<span class="string">"$object_files hello_libz.o"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">	object_files=<span class="string">"$object_files hello_no_libz.o"</span></div><div class="line">fi</div><div class="line"></div><div class="line">dnl Make AC_OUTPUT substitute the contents of $object_files for @objs@</div><div class="line">AC_SUBST(objs, [<span class="string">"$object_files"</span>])</div><div class="line"></div><div class="line">dnl Process Makefile.in to create Makefile</div><div class="line">AC_OUTPUT(Makefile)</div></pre></td></tr></table></figure></p>
+<p>hello_libz.cc</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;zlib.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">//Output a string, compressed in gzip format.</span></div><div class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> in[] = <span class="string">"Hello, I am a program\n"</span>;</div><div class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> out[<span class="number">1024</span>] = &#123;&#125;;</div><div class="line"></div><div class="line">	z_stream strm = &#123;&#125;;</div><div class="line">	deflateInit2(&amp;strm, Z_DEFAULT_COMPRESSION, Z_DEFLATED, <span class="number">8</span>+<span class="number">16</span>, <span class="number">9</span>, Z_DEFAULT_STRATEGY);</div><div class="line">	strm.next_in = in;</div><div class="line">	strm.avail_in = <span class="keyword">sizeof</span>(in);</div><div class="line">	strm.next_out = out;</div><div class="line">	strm.avail_out = <span class="keyword">sizeof</span>(out);</div><div class="line">	deflate(&amp;strm, Z_FINISH);</div><div class="line">	deflateEnd(&amp;strm);</div><div class="line"></div><div class="line">	<span class="built_in">cout</span>.write((<span class="keyword">const</span> <span class="keyword">char</span>*)out, strm.total_out);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>hello_no_libz.cc<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">char</span> data[]=&#123;<span class="number">0x1f</span>,<span class="number">0x8b</span>,<span class="number">0x08</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,</div><div class="line">				<span class="number">0x03</span>,<span class="number">0xf3</span>,<span class="number">0x48</span>,<span class="number">0xcd</span>,<span class="number">0xc9</span>,<span class="number">0xc9</span>,<span class="number">0xd7</span>,<span class="number">0x51</span>,<span class="number">0xf0</span>,</div><div class="line">				<span class="number">0x54</span>,<span class="number">0x48</span>,<span class="number">0xcc</span>,<span class="number">0x55</span>,<span class="number">0x48</span>,<span class="number">0x54</span>,<span class="number">0x28</span>,<span class="number">0x28</span>,<span class="number">0xca</span>,</div><div class="line">				<span class="number">0x4f</span>,<span class="number">0x2f</span>,<span class="number">0x4a</span>,<span class="number">0xcc</span>,<span class="number">0xe5</span>,<span class="number">0x62</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x45</span>,</div><div class="line">				<span class="number">0x29</span>,<span class="number">0xde</span>,<span class="number">0xb8</span>,<span class="number">0x17</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>&#125;;</div><div class="line"></div><div class="line">	<span class="built_in">cout</span>.write(data, <span class="keyword">sizeof</span>(data));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>program.cc<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="comment">//The purpose here is to teach autoconf, not C++ best</span></div><div class="line"><span class="comment">//practices...</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	hello();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里最主要的是这块<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">a=0</div><div class="line">AC_CHECK_HEADERS(zlib.h, [], [a=1])</div><div class="line">AC_SEARCH_LIBS(deflate, z, [], [a=1])</div><div class="line"></div><div class="line">if test $a == 0</div><div class="line">then</div><div class="line">	object_files=<span class="string">"$object_files hello_libz.o"</span></div><div class="line"><span class="keyword">else</span></div><div class="line">	object_files=<span class="string">"$object_files hello_no_libz.o"</span></div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<p><strong>AC_SEARCH_LIBS</strong> 会检测libz库是否存在，测试原理是通过 <strong>AC_CHECK_LIB(m,cos)</strong> 宏，这个宏会生成如下测试代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span> <span class="title">cos</span> <span class="params">()</span></span>; </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></div><div class="line">&#123;   </div><div class="line">    <span class="built_in">cos</span> ();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>参数一:测试的函数<br>参数二:测试的库<br>参数三:成功操作<br>参数四:失败操作  </p>
+<h3 id="四、条件编译"><a href="#四、条件编译" class="headerlink" title="四、条件编译"></a>四、<strong>条件编译</strong></h3><p>makefile.in</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">CXX=@CXX@</div><div class="line">LD=@CXX@</div><div class="line">CXXFLAGS=@CXXFLAGS@</div><div class="line">LDFLAGS=@LDFLAGS@</div><div class="line">LIBS=@LIBS@</div><div class="line"></div><div class="line"><span class="section">program: program.o</span></div><div class="line">	<span class="variable">$(LD)</span> -o <span class="variable">$@</span> <span class="variable">$^</span> <span class="variable">$(LDFLAGS)</span> <span class="variable">$(LIBS)</span></div><div class="line"></div><div class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: clean</span></div><div class="line"><span class="section">clean:</span></div><div class="line">	rm -f program *.o</div></pre></td></tr></table></figure>
+<p>config.in<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> INCLUDE_CONFIG_H_df90858</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INCLUDE_CONFIG_H_df90858</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">undef</span> HAVE_ZLIB</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure></p>
+<p>configure.ac<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">AC_INIT(program, 1.0)</div><div class="line"></div><div class="line">dnl Switch to a C++ compiler, and check if it works.</div><div class="line">AC_LANG(C++)</div><div class="line">AC_PROG_CXX</div><div class="line"></div><div class="line"></div><div class="line">a=0</div><div class="line">AC_CHECK_HEADERS(zlib.h, [], [a=1])</div><div class="line">AC_SEARCH_LIBS(deflate, z, [], [a=1])</div><div class="line"></div><div class="line">if test $a == 0</div><div class="line">then</div><div class="line">	AC_DEFINE(HAVE_LIBZ)</div><div class="line">fi</div><div class="line"></div><div class="line"></div><div class="line">AC_CONFIG_HEADERS(config.h)</div><div class="line">AC_OUTPUT(Makefile)</div></pre></td></tr></table></figure></p>
+<p>program.cc<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"config.h"</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> HAVE_ZLIB</span></div><div class="line">	<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;zlib.h&gt;</span></span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="comment">//Output a string, compressed in gzip format.</span></div><div class="line">		<span class="keyword">unsigned</span> <span class="keyword">char</span> in[] = <span class="string">"Hello, I am a program\n"</span>;</div><div class="line">		<span class="keyword">unsigned</span> <span class="keyword">char</span> out[<span class="number">1024</span>] = &#123;&#125;;</div><div class="line"></div><div class="line">		z_stream strm = &#123;&#125;;</div><div class="line">		deflateInit2(&amp;strm, Z_DEFAULT_COMPRESSION, Z_DEFLATED, <span class="number">8</span>+<span class="number">16</span>, <span class="number">9</span>, Z_DEFAULT_STRATEGY);</div><div class="line">		strm.next_in = in;</div><div class="line">		strm.avail_in = <span class="keyword">sizeof</span>(in);</div><div class="line">		strm.next_out = out;</div><div class="line">		strm.avail_out = <span class="keyword">sizeof</span>(out);</div><div class="line">		deflate(&amp;strm, Z_FINISH);</div><div class="line">		deflateEnd(&amp;strm);</div><div class="line"></div><div class="line">		<span class="built_in">cout</span>.write((<span class="keyword">const</span> <span class="keyword">char</span>*)out, strm.total_out);</div><div class="line">	&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">else</span></span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">char</span> data[]=&#123;<span class="number">0x1f</span>,<span class="number">0x8b</span>,<span class="number">0x08</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,</div><div class="line">					 <span class="number">0x03</span>,<span class="number">0xf3</span>,<span class="number">0x48</span>,<span class="number">0xcd</span>,<span class="number">0xc9</span>,<span class="number">0xc9</span>,<span class="number">0xd7</span>,<span class="number">0x51</span>,<span class="number">0xf0</span>,</div><div class="line">					 <span class="number">0x54</span>,<span class="number">0x48</span>,<span class="number">0xcc</span>,<span class="number">0x55</span>,<span class="number">0x48</span>,<span class="number">0x54</span>,<span class="number">0x28</span>,<span class="number">0x28</span>,<span class="number">0xca</span>,</div><div class="line">					 <span class="number">0x4f</span>,<span class="number">0x2f</span>,<span class="number">0x4a</span>,<span class="number">0xcc</span>,<span class="number">0xe5</span>,<span class="number">0x62</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x45</span>,</div><div class="line">					 <span class="number">0x29</span>,<span class="number">0xde</span>,<span class="number">0xb8</span>,<span class="number">0x17</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>&#125;;</div><div class="line"></div><div class="line">		<span class="built_in">cout</span>.write(data, <span class="keyword">sizeof</span>(data));</div><div class="line">	&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	hello();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这种方式需要写一个config.in配置文件用来生成，config.h，比如如果libz存在会注释 #undef HAVE_ZLIB 并添加 #define HAVE_ZLIB。</p>
+<p>Avoid config.h as much as possible. Disadvantages are:</p>
+<ol>
+<li>Every file depending on config.h must be rebuilt if config.h changes even if the change is irrelevant.</li>
+<li>Conditional compilation is ugly and can lead to tangled messes of dead code.</li>
+<li>It’s generally good practice to avoid the preprocessor where possible.</li>
+<li>If you’re building a library and you’ve got a config.h included from the public headers, then everything using the library has to be rebuilt if config.h changes.</li>
+<li>More source files means better parallel builds.</li>
+</ol>
+<p>以上是针对不存在库的两种使用方式，建议使用第一种，第二种有以上缺点。</p>
+<p>以上其实就够用了，但是也有一些扩展使用，比如–with –enable等，这里举个例子</p>
+<h3 id="五、扩展"><a href="#五、扩展" class="headerlink" title="五、扩展"></a>五、<strong>扩展</strong></h3><p>Makefile.in<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">CXX=@CXX@</div><div class="line">LD=@CXX@</div><div class="line">CXXFLAGS=@CXXFLAGS@</div><div class="line">LDFLAGS=@LDFLAGS@</div><div class="line">LIBS=@LIBS@</div><div class="line"></div><div class="line">objs=@objs@</div><div class="line"></div><div class="line"><span class="section">program: program.o <span class="variable">$(objs)</span></span></div><div class="line">	<span class="variable">$(LD)</span> -o <span class="variable">$@</span> <span class="variable">$^</span> <span class="variable">$(LDFLAGS)</span> <span class="variable">$(LIBS)</span></div><div class="line"></div><div class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: clean</span></div><div class="line"><span class="section">clean:</span></div><div class="line">	rm -f program *.o</div></pre></td></tr></table></figure></p>
+<p>configure.ac<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">AC_INIT(program, 1.0)</div><div class="line"></div><div class="line">dnl Switch to a C++ compiler, and check if it works.</div><div class="line">AC_LANG(C++)</div><div class="line">AC_PROG_CXX</div><div class="line"></div><div class="line">dnl List of object files as determined by autoconf</div><div class="line">object_files=&quot;&quot;</div><div class="line"></div><div class="line">AC_ARG_WITH(zlib, [AS_HELP_STRING([--without-zlib], [do not use zlib])])</div><div class="line"></div><div class="line">zlib_objs=hello_no_libz.o</div><div class="line">if test &quot;$with_zlib&quot; != no</div><div class="line">then</div><div class="line">	a=0</div><div class="line">	AC_CHECK_HEADERS(zlib.h, [], [a=1])</div><div class="line">	AC_SEARCH_LIBS(deflate, z, [], [a=1])</div><div class="line"></div><div class="line">	if test $a == 0</div><div class="line">	then</div><div class="line">		zlib_objs=hello_libz.o</div><div class="line">	fi</div><div class="line">fi</div><div class="line"></div><div class="line">object_files=&quot;$object_files $zlib_objs&quot;</div><div class="line"></div><div class="line">dnl Make AC_OUTPUT substitute the contents of $object_files for @objs@</div><div class="line">AC_SUBST(objs, [&quot;$object_files&quot;])</div><div class="line"></div><div class="line">dnl Process Makefile.in to create Makefile</div><div class="line">AC_OUTPUT(Makefile)</div></pre></td></tr></table></figure></p>
+<p>hello_libz.cc<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;zlib.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">//Output a string, compressed in gzip format.</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> in[] = <span class="string">"Hello, I am a program\n"</span>;</div><div class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> out[<span class="number">1024</span>] = &#123;&#125;;</div><div class="line"></div><div class="line">    z_stream strm = &#123;&#125;;</div><div class="line">    deflateInit2(&amp;strm, Z_DEFAULT_COMPRESSION, Z_DEFLATED, <span class="number">8</span>+<span class="number">16</span>, <span class="number">9</span>, Z_DEFAULT_STRATEGY);</div><div class="line">	strm.next_in = in;</div><div class="line">	strm.avail_in = <span class="keyword">sizeof</span>(in);</div><div class="line">	strm.next_out = out;</div><div class="line">	strm.avail_out = <span class="keyword">sizeof</span>(out);</div><div class="line">	deflate(&amp;strm, Z_FINISH);</div><div class="line">	deflateEnd(&amp;strm);</div><div class="line"></div><div class="line">	<span class="built_in">cout</span>.write((<span class="keyword">const</span> <span class="keyword">char</span>*)out, strm.total_out);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>hello_no_libz.cc<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">char</span> data[]=&#123;<span class="number">0x1f</span>,<span class="number">0x8b</span>,<span class="number">0x08</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,</div><div class="line">	             <span class="number">0x03</span>,<span class="number">0xf3</span>,<span class="number">0x48</span>,<span class="number">0xcd</span>,<span class="number">0xc9</span>,<span class="number">0xc9</span>,<span class="number">0xd7</span>,<span class="number">0x51</span>,<span class="number">0xf0</span>,</div><div class="line">				 <span class="number">0x54</span>,<span class="number">0x48</span>,<span class="number">0xcc</span>,<span class="number">0x55</span>,<span class="number">0x48</span>,<span class="number">0x54</span>,<span class="number">0x28</span>,<span class="number">0x28</span>,<span class="number">0xca</span>,</div><div class="line">				 <span class="number">0x4f</span>,<span class="number">0x2f</span>,<span class="number">0x4a</span>,<span class="number">0xcc</span>,<span class="number">0xe5</span>,<span class="number">0x62</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x45</span>,</div><div class="line">				 <span class="number">0x29</span>,<span class="number">0xde</span>,<span class="number">0xb8</span>,<span class="number">0x17</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>&#125;;</div><div class="line"></div><div class="line">	<span class="built_in">cout</span>.write(data, <span class="keyword">sizeof</span>(data));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>progarm.cc这个同上 都一样。  </p>
+<p>这里修改了以下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">AC_ARG_WITH(zlib, [AS_HELP_STRING([--without-zlib], [do not use zlib])])</div><div class="line"></div><div class="line">zlib_objs=hello_no_libz.o</div><div class="line">if test &quot;$with_zlib&quot; != no</div><div class="line">then</div><div class="line">	a=0</div><div class="line">	AC_CHECK_HEADERS(zlib.h, [], [a=1])</div><div class="line">	AC_SEARCH_LIBS(deflate, z, [], [a=1])</div><div class="line"></div><div class="line">	if test $a == 0</div><div class="line">	then</div><div class="line">		zlib_objs=hello_libz.o</div><div class="line">	fi</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<p>这里可以使用–with-zlib 或者–without-zlib 来选择是否使用zlib库。<br>以上意思是，判断with-zlib是否为no, 默认是yes</p>
+<p>这里记录比较好的学习网站<br>例子:<a href="https://github.com/edrosten/autoconf_tutorial/blob/eb95160b15ca6133ffb5ffc5ee17fdab08fecfdc/README.md" target="_blank" rel="external">https://github.com/edrosten/autoconf_tutorial/blob/eb95160b15ca6133ffb5ffc5ee17fdab08fecfdc/README.md</a><br>变量说明:<a href="http://darktea.github.io/notes/2012/06/24/autotools.html" target="_blank" rel="external">http://darktea.github.io/notes/2012/06/24/autotools.html</a><br>官网:<a href="https://www.gnu.org/software/autoconf/manual/autoconf.html" target="_blank" rel="external">https://www.gnu.org/software/autoconf/manual/autoconf.html</a><br><a href="https://blog.csdn.net/romandion/article/details/1688234#TOC9" target="_blank" rel="external">https://blog.csdn.net/romandion/article/details/1688234#TOC9</a>  </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/08/book-note/" rel="next" title="book_note">
+                <i class="fa fa-chevron-left"></i> book_note
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/22/Unix-domain-socket/" rel="prev" title="Unix域套接字">
+                Unix域套接字 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lflish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/lflish" title="mygit" target="_blank">mygit</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#autoconf工具的初步学习"><span class="nav-number">1.</span> <span class="nav-text">autoconf工具的初步学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#autoconf产生的历史原因"><span class="nav-number">1.1.</span> <span class="nav-text">autoconf产生的历史原因</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Genesis"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、Genesis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Exodus"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、Exodus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Leviticus"><span class="nav-number">1.1.3.</span> <span class="nav-text">三、Leviticus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Numbers"><span class="nav-number">1.1.4.</span> <span class="nav-text">四、Numbers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、Leviticus"><span class="nav-number">1.1.5.</span> <span class="nav-text">五、Leviticus</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#autoconf使用案例"><span class="nav-number">2.</span> <span class="nav-text">autoconf使用案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、普通版本"><span class="nav-number">2.0.1.</span> <span class="nav-text">一、普通版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、autoconf版本"><span class="nav-number">2.0.2.</span> <span class="nav-text">二、autoconf版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、选择文件编译"><span class="nav-number">2.0.3.</span> <span class="nav-text">三、选择文件编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、条件编译"><span class="nav-number">2.0.4.</span> <span class="nav-text">四、条件编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、扩展"><span class="nav-number">2.0.5.</span> <span class="nav-text">五、扩展</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lflish</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.3/jquery.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
